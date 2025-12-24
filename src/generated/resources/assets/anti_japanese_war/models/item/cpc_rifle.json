@@ -1,0 +1,56 @@
+{
+  "parent": "minecraft:item/handheld",
+  "display": {
+    "firstperson_lefthand": {
+      "rotation": [
+        -30,
+        -90,
+        0
+      ],
+      "scale": [
+        1.5,
+        1.5,
+        1.5
+      ]
+    },
+    "firstperson_righthand": {
+      "rotation": [
+        -30,
+        90,
+        0
+      ],
+      "scale": [
+        1.5,
+        1.5,
+        1.5
+      ]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [
+        -45,
+        -90,
+        0
+      ],
+      "translation": [
+        0,
+        0,
+        -3
+      ]
+    },
+    "thirdperson_righthand": {
+      "rotation": [
+        15,
+        80,
+        -60
+      ],
+      "translation": [
+        1,
+        0,
+        -3
+      ]
+    }
+  },
+  "textures": {
+    "layer0": "anti_japanese_war:item/cpc_rifle"
+  }
+}
