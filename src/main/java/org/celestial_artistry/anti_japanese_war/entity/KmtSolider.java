@@ -1,6 +1,9 @@
 package org.celestial_artistry.anti_japanese_war.entity;
 
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
+import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.RandomSource;
@@ -85,6 +88,7 @@ public class KmtSolider extends PathfinderMob implements RangedAttackMob {
         super.populateDefaultEquipmentSlots(p_218949_, p_218950_);
         this.setItemSlot(EquipmentSlot.HEAD, new ItemStack(ModItems.KMT_SOLIDER_HELMET.get()));
         this.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(ModItems.KMT_RIFLE.get()));
+        System.out.println("Setting main hand item " + this.getMainHandItem());
     }
 
     @Override
@@ -171,5 +175,10 @@ public class KmtSolider extends PathfinderMob implements RangedAttackMob {
     @Override
     public boolean canFireProjectileWeapon(ProjectileWeaponItem p_32144_) {
         return p_32144_ == ModItems.MUSKET_BALL.get();
+    }
+
+    @Override
+    public Packet<ClientGamePacketListener> getAddEntityPacket() {
+        return new ClientboundAddEntityPacket(this);
     }
 }

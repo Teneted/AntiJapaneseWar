@@ -1,6 +1,9 @@
 package org.celestial_artistry.anti_japanese_war.entity;
 
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
+import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.RandomSource;
@@ -83,5 +86,11 @@ public class JapaneseKatanaSolider extends PathfinderMob {
         super.populateDefaultEquipmentSlots(p_218949_, p_218950_);
         this.setItemSlot(EquipmentSlot.HEAD, new ItemStack(ModItems.JAPANESE_SOLIDER_HELMET.get()));
         this.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(ModItems.KATANA.get()));
+        System.out.println("Setting main hand item " + this.getMainHandItem());
+    }
+
+    @Override
+    public Packet<ClientGamePacketListener> getAddEntityPacket() {
+        return new ClientboundAddEntityPacket(this);
     }
 }

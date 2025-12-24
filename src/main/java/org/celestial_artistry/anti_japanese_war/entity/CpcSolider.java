@@ -1,6 +1,9 @@
 package org.celestial_artistry.anti_japanese_war.entity;
 
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
+import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.RandomSource;
@@ -12,6 +15,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.MobType;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.SpawnGroupData;
@@ -83,6 +87,7 @@ public class CpcSolider extends PathfinderMob implements RangedAttackMob {
         super.populateDefaultEquipmentSlots(p_218949_, p_218950_);
         this.setItemSlot(EquipmentSlot.HEAD, new ItemStack(ModItems.CPC_SOLIDER_HELMET.get()));
         this.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(ModItems.CPC_RIFLE.get()));
+        System.out.println("Setting main hand item " + this.getMainHandItem());
     }
 
     @Override
@@ -169,5 +174,10 @@ public class CpcSolider extends PathfinderMob implements RangedAttackMob {
     @Override
     public boolean canFireProjectileWeapon(ProjectileWeaponItem p_32144_) {
         return p_32144_ == ModItems.MUSKET_BALL.get();
+    }
+
+    @Override
+    public Packet<ClientGamePacketListener> getAddEntityPacket() {
+        return new ClientboundAddEntityPacket(this);
     }
 }
